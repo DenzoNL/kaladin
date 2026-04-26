@@ -16,7 +16,7 @@
   programs.fish = {
     enable = true;
     shellAliases = {
-      nrs = "sudo nixos-rebuild switch --flake ~/kaladin#kaladin";
+      rebuild = "sudo nixos-rebuild switch --flake ~/kaladin#kaladin";
     };
   };
 
