@@ -17,6 +17,22 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # NVIDIA (RTX 5070 Ti — Blackwell)
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = true;                 # required for 50-series; closed kmod lacks Blackwell support
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    powerManagement.enable = false;
+  };
+
   networking.hostName = "kaladin"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -51,6 +67,7 @@
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
