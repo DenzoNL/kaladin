@@ -42,7 +42,12 @@
     isNormalUser = true;
     description = "Dennis Bogers";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.fish;
   };
+
+  # Required when fish is a login shell: adds fish to /etc/shells, wires up
+  # vendor completions for system packages, and sources NixOS env in fish.
+  programs.fish.enable = true;
 
   programs.firefox.enable = true;
 

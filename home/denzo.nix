@@ -13,10 +13,15 @@
     zed-editor
   ];
 
-  programs.bash = {
+  programs.fish = {
     enable = true;
     shellAliases = {
       nrs = "sudo nixos-rebuild switch --flake ~/kaladin#kaladin";
     };
+  };
+
+  programs.starship = {
+    enable = true;
+    enableFishIntegration = true;
   };
 }
