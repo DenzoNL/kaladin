@@ -8,8 +8,11 @@
   home.packages = with pkgs; [
     claude-code
     git
+    gitkraken
     kdePackages.kate
+    signal-desktop
     vivaldi
+    zapzap
     zed-editor
   ];
 
