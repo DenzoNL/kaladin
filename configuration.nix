@@ -12,13 +12,17 @@
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 10;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelParams = [ "nvidia_drm.modeset=1" "nvidia_drm.fbdev=1" ];
 
   # NVIDIA (RTX 5070 Ti — Blackwell)
   services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.enableRedistributableFirmware = true;
 
   hardware.graphics = {
     enable = true;
@@ -45,6 +49,7 @@
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
+  time.hardwareClockInLocalTime = false;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -61,16 +66,13 @@
     LC_TIME = "nl_NL.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
-
-  # Enable the KDE Plasma Desktop Environment.
+  # Enable the KDE Plasma Desktop Environment (Wayland only).
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
 
-  # Configure keymap in X11
+  # Keyboard layout (used by console + Plasma; the option lives under xserver.xkb
+  # for legacy reasons but applies on Wayland too).
   services.xserver.xkb = {
     layout = "us";
     variant = "intl";
@@ -81,6 +83,9 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  # Weekly TRIM for the NVMe SSD.
+  services.fstrim.enable = true;
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -97,9 +102,6 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.denzo = {
@@ -124,6 +126,25 @@
     # Certain features, including CLI integration and system authentication support,
     # require enabling PolKit integration on some desktop environments (e.g. Plasma).
     polkitPolicyOwners = [ "denzo" ];
+  };
+
+  # Tell Chromium/Electron apps (Vivaldi, VS Code, etc.) to use native Wayland.
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  security.sudo.extraRules = [
+    {
+      users = [ "denzo" ];
+      commands = [
+        {
+          command = "/run/current-system/sw/bin/nixos-rebuild";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
+
+  environment.shellAliases = {
+    nrs = "sudo nixos-rebuild switch --flake ~/kaladin#kaladin";
   };
 
   # Allow unfree packages
@@ -152,7 +173,7 @@
   nix.gc = {
     automatic = true;
     dates = "weekly";
-    options = "--delete-older-than 7d";
+    options = "--delete-older-than 14d";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
