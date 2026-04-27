@@ -9,7 +9,6 @@
     alacritty
     claude-code
     discord
-    git
     gitkraken
     karere
     nixd
@@ -26,6 +25,17 @@
     interactiveShellInit = ''
       set fish_greeting
     '';
+  };
+
+  programs.git = {
+    enable = true;
+    userName = "Dennis Bogers";
+    userEmail = "dennis@bogers.xyz";
+  };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
   };
 
   programs.starship = {
