@@ -37,6 +37,7 @@
 
   services.printing.enable = true;
   services.fstrim.enable = true;
+  services.tailscale.enable = true;
 
   users.users.denzo = {
     isNormalUser = true;
