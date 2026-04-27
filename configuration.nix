@@ -55,6 +55,11 @@
   programs.steam.enable = true;
   programs.gamemode.enable = true;
 
+  programs.nh = {
+    enable = true;
+    flake = "/home/denzo/kaladin";
+  };
+
   programs._1password.enable = true;
   programs._1password-gui = {
     enable = true;

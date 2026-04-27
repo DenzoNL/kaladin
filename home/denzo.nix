@@ -21,7 +21,7 @@
   programs.fish = {
     enable = true;
     shellAliases = {
-      rebuild = "sudo nixos-rebuild switch --flake ~/kaladin#kaladin";
+      rebuild = "nh os switch";
     };
     interactiveShellInit = ''
       set fish_greeting
