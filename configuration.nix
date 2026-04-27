@@ -71,7 +71,7 @@
       users = [ "denzo" ];
       commands = [
         {
-          command = "/run/current-system/sw/bin/nixos-rebuild";
+          command = "/nix/store/*/bin/nixos-rebuild";
           options = [ "NOPASSWD" ];
         }
       ];
