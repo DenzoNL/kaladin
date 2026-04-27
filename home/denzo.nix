@@ -12,6 +12,7 @@
     gitkraken
     karere
     nixd
+    plexamp
     signal-desktop
     vivaldi
     zed-editor
@@ -29,8 +30,10 @@
 
   programs.git = {
     enable = true;
-    userName = "Dennis Bogers";
-    userEmail = "dennis@bogers.xyz";
+    settings.user = {
+      name = "Dennis Bogers";
+      email = "dennis@bogers.xyz";
+    };
   };
 
   programs.direnv = {
