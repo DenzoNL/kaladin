@@ -56,6 +56,10 @@
         follow_mouse = 1;
       };
 
+      dwindle = {
+        preserve_split = true;
+      };
+
       bind = [
         "$mod, RETURN, exec, $terminal"
         "$mod, Q, killactive,"
@@ -64,6 +68,7 @@
         "$mod SHIFT, E, exit,"
         "$mod, V, togglefloating,"
         "$mod, F, fullscreen,"
+        "$mod, J, layoutmsg, togglesplit"
 
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"
@@ -93,6 +98,9 @@
         ", PRINT, exec, hyprshot -m region"
         "SHIFT, PRINT, exec, hyprshot -m window"
         "CTRL, PRINT, exec, hyprshot -m output"
+
+        "$mod, minus, resizeactive, -100 0"
+        "$mod, equal, resizeactive,  100 0"
       ];
 
       bindm = [
@@ -121,23 +129,135 @@
     settings.mainBar = {
       layer = "top";
       position = "top";
-      height = 30;
+      height = 36;
+      spacing = 0;
+
       modules-left = [ "hyprland/workspaces" ];
-      modules-center = [ "clock" ];
-      modules-right = [ "pulseaudio" "network" "tray" ];
-      clock.format = "{:%Y-%m-%d %H:%M}";
+      modules-center = [ "hyprland/window" ];
+      modules-right = [ "cpu" "memory" "pulseaudio" "network" "tray" "clock" ];
+
+      "hyprland/workspaces" = {
+        format = "{name}";
+        on-click = "activate";
+      };
+
+      "hyprland/window" = {
+        format = "{title}";
+        max-length = 80;
+        separate-outputs = true;
+      };
+
+      cpu = {
+        format = "  {usage}%";
+        interval = 2;
+      };
+
+      memory = {
+        format = "  {percentage}%";
+        interval = 5;
+      };
+
       pulseaudio = {
-        format = "{volume}% {icon}";
-        format-muted = "muted";
+        format = "{icon}  {volume}%";
+        format-muted = "  muted";
         format-icons.default = [ "" "" "" ];
         on-click = "pavucontrol";
       };
+
       network = {
-        format-wifi = "{essid} ({signalStrength}%) ";
-        format-ethernet = "eth ";
-        format-disconnected = "disconnected";
+        format-wifi = "  {signalStrength}%";
+        format-ethernet = "  {ipaddr}";
+        format-disconnected = "󰖪  off";
+        tooltip-format-wifi = "{essid} ({signalStrength}%)";
+      };
+
+      clock = {
+        format = "  {:%H:%M}";
+        format-alt = "  {:%a %Y-%m-%d  %H:%M}";
+        tooltip-format = "<tt>{calendar}</tt>";
+      };
+
+      tray = {
+        spacing = 12;
       };
     };
+
+    style = ''
+      * {
+        font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font Mono";
+        font-size: 13px;
+        min-height: 0;
+      }
+
+      window#waybar {
+        background: transparent;
+        color: #cdd6f4;
+      }
+
+      #workspaces,
+      #window,
+      #cpu,
+      #memory,
+      #pulseaudio,
+      #network,
+      #clock,
+      #tray {
+        background: #1e1e2e;
+        border-radius: 10px;
+        margin: 4px 3px;
+        padding: 0 12px;
+      }
+
+      #workspaces {
+        padding: 0 6px;
+      }
+
+      #workspaces button {
+        padding: 0 8px;
+        margin: 3px 2px;
+        color: #6c7086;
+        background: transparent;
+        border-radius: 6px;
+        border: none;
+        transition: all 0.15s ease-in-out;
+      }
+
+      #workspaces button:hover {
+        background: #313244;
+        color: #cdd6f4;
+      }
+
+      #workspaces button.active {
+        background: #cba6f7;
+        color: #1e1e2e;
+      }
+
+      #workspaces button.urgent {
+        background: #f38ba8;
+        color: #1e1e2e;
+      }
+
+      #window {
+        color: #bac2de;
+        font-style: italic;
+      }
+
+      #cpu       { color: #f9e2af; }
+      #memory    { color: #a6e3a1; }
+      #pulseaudio { color: #fab387; }
+      #pulseaudio.muted { color: #6c7086; }
+      #network   { color: #89b4fa; }
+      #network.disconnected { color: #f38ba8; }
+      #clock     { color: #cba6f7; font-weight: bold; }
+
+      #tray {
+        padding: 0 10px;
+      }
+
+      #tray > .needs-attention {
+        -gtk-icon-effect: highlight;
+      }
+    '';
   };
 
   services.mako = {
