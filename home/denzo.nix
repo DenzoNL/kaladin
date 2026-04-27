@@ -24,6 +24,7 @@
     discord
     gitkraken
     karere
+    kdePackages.dolphin
     nixd
     plexamp
     signal-desktop

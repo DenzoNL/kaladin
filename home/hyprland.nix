@@ -23,6 +23,8 @@
         "XDG_SESSION_TYPE,wayland"
         "GBM_BACKEND,nvidia-drm"
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        "QT_QPA_PLATFORMTHEME,kvantum"
+        "QT_STYLE_OVERRIDE,kvantum"
       ];
 
       exec-once = [
@@ -130,8 +132,15 @@
       enable = true;
       useDefaultConfig = false;
     };
+    kvantum.enable = true;
     mako.enable = true;
     waybar.enable = true;
+  };
+
+  qt = {
+    enable = true;
+    platformTheme.name = "kvantum";
+    style.name = "kvantum";
   };
 
   programs.walker = {
