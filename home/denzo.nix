@@ -6,10 +6,10 @@
   home.stateVersion = "25.11";
 
   home.packages = with pkgs; [
+    alacritty
     claude-code
     git
     gitkraken
-    kdePackages.kate
     signal-desktop
     vivaldi
     zapzap
