@@ -8,9 +8,11 @@
   home.packages = with pkgs; [
     alacritty
     claude-code
+    discord
     git
     gitkraken
     karere
+    nixd
     signal-desktop
     vivaldi
     zed-editor
