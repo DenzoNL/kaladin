@@ -1,9 +1,14 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
+
+  fonts.packages = with pkgs; [
+    corefonts
+    vista-fonts
+  ];
 
   # Keyboard layout (used by console + Plasma; the option lives under
   # xserver.xkb for legacy reasons but applies on Wayland too).
