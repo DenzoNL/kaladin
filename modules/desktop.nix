@@ -8,6 +8,7 @@
   fonts.packages = with pkgs; [
     corefonts
     vista-fonts
+    nerd-fonts.jetbrains-mono
   ];
 
   # Keyboard layout (used by console + Plasma; the option lives under
