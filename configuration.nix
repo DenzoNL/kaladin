@@ -35,7 +35,6 @@
     LC_TIME = "nl_NL.UTF-8";
   };
 
-  services.printing.enable = true;
   services.fstrim.enable = true;
   services.tailscale.enable = true;
 
@@ -50,8 +49,6 @@
   # vendor completions for system packages, and sources NixOS env in fish.
   programs.fish.enable = true;
 
-  programs.firefox.enable = true;
-
   programs.steam.enable = true;
   programs.gamemode.enable = true;
 
@@ -65,18 +62,6 @@
     enable = true;
     polkitPolicyOwners = [ "denzo" ];
   };
-
-  security.sudo.extraRules = [
-    {
-      users = [ "denzo" ];
-      commands = [
-        {
-          command = "/nix/store/*/bin/nixos-rebuild";
-          options = [ "NOPASSWD" ];
-        }
-      ];
-    }
-  ];
 
   environment.etc."1password/custom_allowed_browsers" = {
     text = ''
