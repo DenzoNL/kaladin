@@ -30,11 +30,23 @@
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.sddm.enableGnomeKeyring = true;
 
-  fonts.packages = with pkgs; [
-    corefonts
-    vista-fonts
-    nerd-fonts.jetbrains-mono
-  ];
+  fonts = {
+    packages = with pkgs; [
+      corefonts
+      vista-fonts
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.symbols-only
+      noto-fonts
+      noto-fonts-color-emoji
+    ];
+
+    fontconfig.defaultFonts = {
+      monospace = [ "JetBrainsMono Nerd Font" "Symbols Nerd Font Mono" ];
+      sansSerif = [ "Noto Sans" ];
+      serif = [ "Noto Serif" ];
+      emoji = [ "Noto Color Emoji" ];
+    };
+  };
 
   # Keyboard layout for console + Wayland (option lives under xserver.xkb
   # for legacy reasons but applies on Wayland too).

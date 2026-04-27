@@ -2,7 +2,6 @@
 
 {
   home.packages = with pkgs; [
-    wofi
     grim
     slurp
     wl-clipboard
@@ -34,7 +33,7 @@
 
       "$mod" = "SUPER";
       "$terminal" = "alacritty";
-      "$menu" = "wofi --show drun";
+      "$menu" = "walker";
 
       general = {
         gaps_in = 4;
@@ -124,6 +123,21 @@
     };
   };
 
+  catppuccin = {
+    hyprland.enable = true;
+    hyprlock = {
+      enable = true;
+      useDefaultConfig = false;
+    };
+    mako.enable = true;
+    waybar.enable = true;
+  };
+
+  programs.walker = {
+    enable = true;
+    runAsService = true;
+  };
+
   programs.waybar = {
     enable = true;
     settings.mainBar = {
@@ -191,7 +205,7 @@
 
       window#waybar {
         background: transparent;
-        color: #cdd6f4;
+        color: @text;
       }
 
       #workspaces,
@@ -202,7 +216,7 @@
       #network,
       #clock,
       #tray {
-        background: #1e1e2e;
+        background: @base;
         border-radius: 10px;
         margin: 4px 3px;
         padding: 0 12px;
@@ -215,7 +229,7 @@
       #workspaces button {
         padding: 0 8px;
         margin: 3px 2px;
-        color: #6c7086;
+        color: @overlay0;
         background: transparent;
         border-radius: 6px;
         border: none;
@@ -223,32 +237,32 @@
       }
 
       #workspaces button:hover {
-        background: #313244;
-        color: #cdd6f4;
+        background: @surface0;
+        color: @text;
       }
 
       #workspaces button.active {
-        background: #cba6f7;
-        color: #1e1e2e;
+        background: @accent;
+        color: @base;
       }
 
       #workspaces button.urgent {
-        background: #f38ba8;
-        color: #1e1e2e;
+        background: @red;
+        color: @base;
       }
 
       #window {
-        color: #bac2de;
+        color: @subtext1;
         font-style: italic;
       }
 
-      #cpu       { color: #f9e2af; }
-      #memory    { color: #a6e3a1; }
-      #pulseaudio { color: #fab387; }
-      #pulseaudio.muted { color: #6c7086; }
-      #network   { color: #89b4fa; }
-      #network.disconnected { color: #f38ba8; }
-      #clock     { color: #cba6f7; font-weight: bold; }
+      #cpu        { color: @yellow; }
+      #memory     { color: @green; }
+      #pulseaudio { color: @peach; }
+      #pulseaudio.muted { color: @overlay0; }
+      #network    { color: @blue; }
+      #network.disconnected { color: @red; }
+      #clock      { color: @accent; font-weight: bold; }
 
       #tray {
         padding: 0 10px;
