@@ -10,9 +10,9 @@
     claude-code
     git
     gitkraken
+    karere
     signal-desktop
     vivaldi
-    zapzap
     zed-editor
   ];
 
