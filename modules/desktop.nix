@@ -1,9 +1,34 @@
 { pkgs, ... }:
 
 {
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+    theme = "catppuccin-mocha-mauve";
+    package = pkgs.kdePackages.sddm;
+  };
+  environment.systemPackages = [
+    pkgs.catppuccin-sddm
+    pkgs.hyprpolkitagent
+  ];
+
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+  };
+  programs.hyprlock.enable = true;
+  services.hypridle.enable = true;
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config.common.default = [ "hyprland" "gtk" ];
+  };
+
+  security.polkit.enable = true;
+
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.sddm.enableGnomeKeyring = true;
 
   fonts.packages = with pkgs; [
     corefonts
@@ -11,8 +36,8 @@
     nerd-fonts.jetbrains-mono
   ];
 
-  # Keyboard layout (used by console + Plasma; the option lives under
-  # xserver.xkb for legacy reasons but applies on Wayland too).
+  # Keyboard layout for console + Wayland (option lives under xserver.xkb
+  # for legacy reasons but applies on Wayland too).
   services.xserver.xkb = {
     layout = "us";
     variant = "intl";
