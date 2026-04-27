@@ -10,7 +10,8 @@ NixOS module.
 - `configuration.nix` — system-level config (boot, networking, users, programs)
 - `hardware-configuration.nix` — generated, machine-specific
 - `modules/` — split-out system modules (hardware, desktop, audio, nix settings)
-- `home/denzo.nix` — home-manager config for my user
+- `home/denzo.nix` — home-manager entry point: identity + package list,
+  imports `shell.nix` and `git.nix` for grouped config
 
 ## Rebuild
 
