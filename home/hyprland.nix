@@ -62,6 +62,15 @@
         preserve_split = true;
       };
 
+      windowrule = [
+        "workspace 1 silent, match:class ^([Vv]ivaldi.*)$"
+        "workspace 2 silent, match:class ^(dev\\.zed\\.Zed|[Zz]ed)$"
+        "workspace 3 silent, match:class ^([Ss]ignal)$"
+        "workspace 3 silent, match:class ^([Kk]arere)$"
+        "workspace 3 silent, match:class ^(discord|vesktop|WebCord)$"
+        "workspace 4 silent, match:class ^([Ss]team)$"
+      ];
+
       bind = [
         "$mod, RETURN, exec, $terminal"
         "$mod, Q, killactive,"
