@@ -21,6 +21,9 @@
     shellAliases = {
       rebuild = "sudo nixos-rebuild switch --flake ~/kaladin#kaladin";
     };
+    interactiveShellInit = ''
+      set fish_greeting
+    '';
   };
 
   programs.starship = {
