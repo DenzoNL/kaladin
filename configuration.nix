@@ -12,6 +12,7 @@
   # Bootloader.
   boot.loader.limine = {
     enable = true;
+    secureBoot.enable = true;
     maxGenerations = 10;
     extraEntries = ''
       /Windows
