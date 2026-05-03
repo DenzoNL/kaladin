@@ -4,6 +4,7 @@
   imports = [
     ./shell.nix
     ./git.nix
+    ./plasma.nix
   ];
 
   home.username = "denzo";

@@ -1,9 +1,17 @@
 { pkgs, ... }:
 
 {
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+    theme = "sddm-astronaut-theme";
+    extraPackages = with pkgs.kdePackages; [ qtmultimedia qtsvg qtvirtualkeyboard ];
+  };
   services.desktopManager.plasma6.enable = true;
+
+  # Theme package must land in /run/current-system/sw so SDDM can discover it
+  # via its hard-coded ThemeDir.
+  environment.systemPackages = [ pkgs.sddm-astronaut ];
 
   fonts.packages = with pkgs; [
     corefonts
