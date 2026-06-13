@@ -25,7 +25,6 @@ in
     enable = true;
 
     workspace = {
-      lookAndFeel = "Catppuccin-Mocha-Mauve";
       colorScheme = "CatppuccinMochaMauve";
       iconTheme = "Papirus-Dark";
       widgetStyle = "kvantum";
@@ -37,6 +36,7 @@ in
         theme = "catppuccin-mocha-mauve-cursors";
         size = 24;
       };
+      splashScreen.theme = "Catppuccin-Mocha-Mauve-splash";
     };
 
     # Tell Kvantum which theme to render Qt apps with.
