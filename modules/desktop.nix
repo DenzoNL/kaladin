@@ -5,7 +5,11 @@
     enable = true;
     wayland.enable = true;
     theme = "sddm-astronaut-theme";
-    extraPackages = with pkgs.kdePackages; [ qtmultimedia qtsvg qtvirtualkeyboard ];
+    extraPackages = with pkgs.kdePackages; [
+      qtmultimedia
+      qtsvg
+      qtvirtualkeyboard
+    ];
   };
   services.desktopManager.plasma6.enable = true;
 

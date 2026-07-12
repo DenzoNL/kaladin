@@ -16,21 +16,33 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, plasma-manager, ... }: {
-    nixosConfigurations.kaladin = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
-      modules = [
-        ./configuration.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = { inherit inputs; };
-          home-manager.sharedModules = [ plasma-manager.homeModules.plasma-manager ];
-          home-manager.users.denzo = import ./home/denzo.nix;
-        }
-      ];
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      home-manager,
+      plasma-manager,
+      ...
+    }:
+    {
+      checks = import ./checks.nix { inherit nixpkgs self; };
+
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
+
+      nixosConfigurations.kaladin = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.sharedModules = [ plasma-manager.homeModules.plasma-manager ];
+            home-manager.users.denzo = import ./home/denzo.nix;
+          }
+        ];
+      };
     };
-  };
 }

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -24,6 +24,8 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.tmp.cleanOnBoot = true;
+
   networking.hostName = "kaladin";
   networking.networkmanager.enable = true;
 
@@ -43,13 +45,26 @@
     LC_TIME = "nl_NL.UTF-8";
   };
 
+  # Compressed in-RAM swap; costs memory only in proportion to what is
+  # actually swapped (~3:1 with zstd), capped at 50% of RAM uncompressed.
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 50;
+  };
+
   services.fstrim.enable = true;
+  # Firmware updates via LVFS (UEFI, SSD, peripherals): `fwupdmgr update`.
+  services.fwupd.enable = true;
   services.tailscale.enable = true;
 
   users.users.denzo = {
     isNormalUser = true;
     description = "Dennis Bogers";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     shell = pkgs.fish;
   };
 
