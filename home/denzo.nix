@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   imports = [
@@ -19,7 +19,12 @@
     nixd
     plexamp
     signal-desktop
-    vivaldi
     zed-editor
   ];
+
+  programs.firefox = {
+    enable = true;
+    # Fresh install, so adopt the XDG profile path (default from 26.05).
+    configPath = "${config.xdg.configHome}/mozilla/firefox";
+  };
 }

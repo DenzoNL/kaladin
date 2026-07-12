@@ -32,6 +32,6 @@
 
   console.keyMap = "us-acentos";
 
-  # Native Wayland for Chromium/Electron apps (Vivaldi, VS Code, etc.).
+  # Native Wayland for Chromium/Electron apps (VS Code, Discord, etc.).
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 }
