@@ -56,7 +56,6 @@
   services.fstrim.enable = true;
   # Firmware updates via LVFS (UEFI, SSD, peripherals): `fwupdmgr update`.
   services.fwupd.enable = true;
-  services.tailscale.enable = true;
 
   users.users.denzo = {
     isNormalUser = true;
