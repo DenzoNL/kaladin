@@ -14,8 +14,8 @@
   home.packages = with pkgs; [
     claude-code
     discord
+    devenv
     gitkraken
-    gcc
     karere
     nixd
     package-version-server
