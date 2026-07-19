@@ -17,7 +17,9 @@
     gitkraken
     karere
     nixd
+    package-version-server
     plexamp
+    rustup
     signal-desktop
     zed-editor
   ];
