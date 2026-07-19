@@ -15,6 +15,7 @@
     claude-code
     discord
     gitkraken
+    gcc
     karere
     nixd
     package-version-server
