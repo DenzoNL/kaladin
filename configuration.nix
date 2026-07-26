@@ -54,6 +54,7 @@
   };
 
   services.fstrim.enable = true;
+  services.journald.extraConfig = "SystemMaxUse=500M";
   # Firmware updates via LVFS (UEFI, SSD, peripherals): `fwupdmgr update`.
   services.fwupd.enable = true;
 
@@ -77,6 +78,11 @@
   programs.nh = {
     enable = true;
     flake = "/home/denzo/kaladin";
+    clean = {
+      enable = true;
+      dates = "weekly";
+      extraArgs = "--keep 5 --keep-since 7d";
+    };
   };
 
   programs._1password.enable = true;
