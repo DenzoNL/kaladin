@@ -16,12 +16,12 @@
     discord
     devenv
     gitkraken
-    karere
     nixd
     package-version-server
     plexamp
     rustup
     signal-desktop
+    zapzap
     zed-editor
   ];
 
