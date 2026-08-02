@@ -15,6 +15,7 @@
     claude-code
     discord
     devenv
+    gh
     gitkraken
     nixd
     package-version-server
